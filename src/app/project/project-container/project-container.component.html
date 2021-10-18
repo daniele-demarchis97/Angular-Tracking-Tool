@@ -1,0 +1,9 @@
+<ngprj-project-list [projects]="projects" (selected)="selectProject($event)"></ngprj-project-list>
+
+<hr>
+<!-- <p *ngIf="selectedProject">Progetto Selezionato: {{ selectedProject.name }}</p>    NOT NEEDED ANYMORE-->    
+<ngprj-project-detail [project]="selectedProject"></ngprj-project-detail>
+
+<hr>
+<ngprj-project-form (submitted)="submitProjectForm($event)"></ngprj-project-form>
+
