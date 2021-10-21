@@ -8,7 +8,7 @@ import { Project } from '@app/models/Project';     //percorso relativo
 })
 export class ProjectContainerComponent implements OnInit {
 
-  selectedProject!: Project;     // con ! diciamo che il valore non può essere null o undefined, senza di esso angular avrebbe dato errore 
+  selectedProject!: Project;
 
   projects: Project[] = [
     {
@@ -45,12 +45,7 @@ export class ProjectContainerComponent implements OnInit {
     }
   ];
 
-  constructor() {
-    //setTimeout(() => this.projects[0].name = 'Spilungone', 3000);
-    //setTimeout(() => delete this.projects[0].end, 3000);
-    //setTimeout(() => this.projects = [] , 3000);
-    //setTimeout(() => this.projects[0].done = false , 3000);
-  }
+  constructor() { }
 
   ngOnInit(): void {
   }

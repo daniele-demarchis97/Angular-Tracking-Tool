@@ -8,12 +8,10 @@ import { Project } from '@app/models/Project';
 })
 export class ProjectDetailComponent implements OnInit {
 
-  @Input() project!: Project;       //la proprietà adesso potrà essere vista dall'esterno dal padre (n.b. aggiunta anche in import) COMUNICAZIONE PARENT-CHILD
-//project!: Partial<Project>;       rende i parametri opzionali e non darà errore
+  @Input() project!: Project;
 
-  constructor() { 
-  //this.project = { id: 1, name: 'Prova'};
-  }
+
+  constructor() { }
 
   ngOnInit(): void {
   }

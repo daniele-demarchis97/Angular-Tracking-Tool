@@ -9,14 +9,14 @@ import { Project } from '@app/models/Project';
 export class ProjectListComponent implements OnInit {
 
   @Input() projects: Project[] = [];
-  @Output() selected = new EventEmitter<Project>(); //nb deve essere di angular/core
+  @Output() selected = new EventEmitter<Project>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  select (project: Project) {
+  select(project: Project) {
     this.selected.emit(project);
   }
 

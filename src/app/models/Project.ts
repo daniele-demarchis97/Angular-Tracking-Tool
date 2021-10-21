@@ -1,6 +1,6 @@
 import { Task } from "./Task";
 
-export type priority = 'low' | 'medium' | 'high';  // type custom
+export type priority = 'low' | 'medium' | 'high';
 
 export interface Project {
     id: number;
