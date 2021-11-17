@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Project } from '@app/models/Project';
+import { LogService } from '@app/shared/log.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -41,13 +45,20 @@ export class ProjectService {
     }
   ];
 
-  constructor() { }
+  private projectSubject = new BehaviorSubject<Project[]>(this.projects);
 
-  getAll(): Project[] {
-    return this.projects;
+  public project$ = this.projectSubject.asObservable();
+
+  constructor(private logService: LogService) { }
+
+  getAll(): Observable<Project[]> {
+    return this.project$.pipe(
+      tap(() => this.logService.log('getAll Eseguito'))
+    );
   }
 
   add(project: Project): void {
+    this.logService.log('add Eseguito');
     this.projects.push({
       ...project,
       id: this.projects.length,
@@ -55,9 +66,12 @@ export class ProjectService {
       done: false,
       tasks: [],
     });
+
+    this.projectSubject.next(this.projects.slice());
   }
 
   get(id: number): Project {
+    this.logService.log('get Eseguito');
     return this.projects.find(project => project.id === id) as Project;  //Type assertion: assicura che ritornerà certamente un Project
   }
 }

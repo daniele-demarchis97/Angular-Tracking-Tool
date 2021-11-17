@@ -16,7 +16,9 @@ export class ProjectContainerComponent implements OnInit {
   constructor(private projectService: ProjectService) { }
 
   ngOnInit(): void {
-    this.projects = this.projectService.getAll();
+    this.projectService.getAll().subscribe(data => {
+      this.projects = data;
+    });
   }
 
   selectProject(project: Project) {
