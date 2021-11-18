@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '@app/models/Project';     //percorso relativo
+import { Observable } from 'rxjs';
+
+import { Project } from '@app/models/Project';
 import { ProjectService } from '../project.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngprj-project-container',
@@ -9,24 +12,20 @@ import { ProjectService } from '../project.service';
 })
 export class ProjectContainerComponent implements OnInit {
 
-  selectedProject!: Project;
+  projects$!: Observable<Project[]>;
 
-  projects: Project[] = []
-
-  constructor(private projectService: ProjectService) { }
+  constructor(private projectService: ProjectService, private router: Router) { }
 
   ngOnInit(): void {
-    this.projectService.getAll().subscribe(data => {
-      this.projects = data;
-    });
+    this.projects$ = this.projectService.getAll();
   }
 
   selectProject(project: Project) {
-    this.selectedProject = this.projectService.get(project.id);
+    this.router.navigate(['/projects', 'detail', project.id]);
   }
 
   submitProjectForm(project: Project) {
-    this.projectService.add(project);
+    this.projectService.add(project).subscribe(data => this.projects$ = this.projectService.getAll());
   }
 
 }
